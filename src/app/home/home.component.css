@@ -1,0 +1,70 @@
+div mat-card {
+  width: 35%
+}
+
+form.name-form {
+  position: relative;
+  top: 20px
+}
+
+button {
+  outline: none;
+}
+
+button#grid-button {
+  outline: none;
+}
+
+.card {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+}
+
+.gridster-item-content {
+  text-align: center;
+}
+
+#gridsterDiv {
+  width: 100%;
+  height: calc(100% - 63px);
+}
+
+#noChartCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100% - 63px);
+  background: #7f7f7f;
+  text-align: center
+}
+
+#footerButton {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  margin-right: 35px;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+#backButton {
+  float: left;
+  outline: none;
+}
+
+#closeButton {
+  outline: none;
+}
+
+#grid-button {
+  margin: 2px
+}
+
+#chart-container {
+  position: relative;
+  height: 80vh;
+}

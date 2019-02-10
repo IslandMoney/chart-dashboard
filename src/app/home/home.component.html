@@ -1,0 +1,104 @@
+<div *ngIf="dashboard.length > 0" id="gridsterDiv">
+  <gridster [options]="options">
+    <gridster-item [item]="item" *ngFor="let item of dashboard">
+      <div class="item-holder">
+        <div class="gridster-item-content">
+
+          <div *ngIf="!item.hasName && item.hasContent && !item.hasChartSelection && !item.hasDataSelection" class="ifDiv">
+            <div class="card">
+              <div class="card-header">
+                Chart Name
+                <button type="button" id="closeButton" (click)="removeItem($event, item)" class="close" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <form class="name-form">
+              <mat-form-field class="name-full-width">
+                <input matInput placeholder="Chart name" (keyup)="onKey($event)" required>
+              </mat-form-field>
+              <button *ngIf="nameInputValue" type="submit" mat-button color="primary" (click)="addName($event, item)">Save</button>
+            </form>
+          </div>
+
+          <div *ngIf="item.hasName && item.hasContent && !item.hasChartSelection && !item.hasDataSelection" class="ifDiv">
+            <div class="card">
+              <div class="card-header">
+                {{ item.name }}
+                <button type="button" id="closeButton" (click)="removeItem($event, item)" class="close" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <span>Please select the type of chart you wish to display.</span>
+            </div>
+            <div>
+              <button id="grid-button" mat-stroked-button (click)="addLine($event, item)">Line</button>
+              <button id="grid-button" mat-stroked-button (click)="addBar($event, item)">Bar</button>
+              <button id="grid-button" mat-stroked-button (click)="addDoughnut($event, item)">Doughnut</button>
+              <button id="grid-button" mat-stroked-button (click)="addRadar($event, item)">Radar</button>
+              <button id="grid-button" mat-stroked-button (click)="addPie($event, item)">Pie</button>
+              <button id="grid-button" mat-stroked-button (click)="addPolar($event, item)">Polar Area</button>
+            </div>
+          </div>
+
+          <div *ngIf="minTemp && item.hasContent && item.hasChartSelection && !item.hasDataSelection" class="ifDiv">
+            <div class="card">
+              <div class="card-header">
+                <button type="button" id="backButton" (click)="item.hasChartSelection=false" class="close" aria-label="Go Back">
+                  <span aria-hidden="true">
+                    <</span> </button> {{ item.name }} <button type="button" id="closeButton" (click)="removeItem($event, item)"
+                      class="close" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <span>Please select the data you wish to display.</span>
+            </div>
+            <div>
+              <button id="grid-button" mat-stroked-button (click)="addTemps($event, item)">Temperatures</button>
+              <button id="grid-button" mat-stroked-button (click)="addMinMax($event, item)">Min/Max Temps</button>
+              <button id="grid-button" mat-stroked-button (click)="addDew($event, item)">Dew Point</button>
+              <button id="grid-button" mat-stroked-button (click)="addWind($event, item)">Wind Speed</button>
+              <button id="grid-button" mat-stroked-button (click)="addBaro($event, item)">Barometric Pressure</button>
+            </div>
+          </div>
+
+          <div *ngIf="minTemp && item.hasContent && item.hasChartSelection && item.hasDataSelection">
+            <div class="card">
+              <div class="card-header">
+                <button type="button" id="backButton" (click)="item.hasDataSelection=false" class="close" aria-label="Go Back">
+                  <span aria-hidden="true">
+                    <</span> </button> {{ item.name }} <button type="button" id="closeButton" (click)="removeItem($event, item)"
+                      class="close" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div id="chart-container">
+                <canvas baseChart [datasets]=item.dashboardData [labels]="chartLabels" [options]="chartOptions"
+                  [legend]="chartLegend" [chartType]="item.dashboardChartType"></canvas>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </gridster-item>
+  </gridster>
+</div>
+<div id="noChartCard" *ngIf="!dashboard || dashboard.length === 0">
+  <mat-card>
+    <mat-card-title>No Chart Added</mat-card-title>
+    <button mat-button style="outline: none" class="add-button cols-2" (click)="addItem()">
+      <a style="font-size: 16px">New Chart</a>
+      <mat-icon style="margin-bottom: 2px">add</mat-icon>
+    </button>
+  </mat-card>
+</div>
+<div>
+  <button id="footerButton" style="background: #3f51b5" mat-fab (click)="addItem()" class="add-button cols-2">
+    <mat-icon style="color: white">add</mat-icon>
+  </button>
+</div>

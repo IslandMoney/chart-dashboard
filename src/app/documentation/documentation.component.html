@@ -1,0 +1,175 @@
+<div id="mainDiv">
+  <div id="cardDiv">
+    <div id="titleDiv">
+      <h3 id="title">Documentation</h3>
+    </div>
+    <div id="mainDocumentation">
+      <h5>1. Project Description</h5>
+      <p>
+        The purpose of this Application is to display charts in dragable and resizable containers.
+        <br>
+        The user needs to be able to choose the name, chart type and chart data that will be displayed.
+        <br>
+        Using Spring Boot we get the data from an SQL server (listening on port:3306) and then displayed on port:8080
+        as a JSON Object.
+        <br>
+        Then, using ANGULAR HttpClientModule we map the data to an Object. Afterwards to multiple arrays with the
+        respective data.
+      </p>
+      <h5>2. Technical Elements</h5>
+      <div style="position: relative; left: 25px">
+        <h6>
+          - Architecture
+        </h6>
+        <div style="position: relative; left: 25px">
+          - Technologies Used:
+          <ul>
+            <li>HTML</li>
+            <li>CSS & SCSS</li>
+            <li>SPRING BOOT</li>
+            <li>ANGULAR 7</li>
+            <li>SQL Database</li>
+          </ul>
+          - Database Description:
+          <ul>
+            <li>
+              The database is a mockup weather data database created and populated via an SQL script. <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; (it has data similar to actual weather data)
+            </li>
+          </ul>
+          - Classes, Objects and More
+          <ul>
+            <li>
+              SpringDataCrudJpa - the main class
+            </li>
+            <li>
+              WeatherRepository - the DAO
+            </li>
+            <li>
+              Weather - the Entity (gets data from database, defines fields, constructors, getters, setters & the
+              toString)
+            </li>
+            <li>
+              WeatherController - the REST (exposes mappings for GET POST DELETE & PUT after the /api mapping)
+            </li>
+          </ul>
+          - Endpoints
+          <ul>
+            <li>api/weathers/</li>
+            <li>api/weathers/:id</li>
+            <li>api/weathers/:id/temperature</li>
+            <li>api/weathers/:id/dailyHighTemp</li>
+            <li>api/weathers/:id/dailyHighTemp</li>
+            <li>api/weathers/:id/dewPoint</li>
+            <li>api/weathers/:id/windSpeed</li>
+            <li>api/weathers/:id/windDirection</li>
+            <li>api/weathers/:id/barometricPressure</li>
+            <li>api/weathers/:id/visibility</li>
+            <li>api/weathers/:id/sunrise</li>
+            <li>api/weathers/:id/sunset</li>
+          </ul>
+        </div>
+        <h6>
+          - Information Flux
+        </h6>
+        <div style="position: relative; left: 25px">
+          <ul>
+            <li>We listen to our database on port:3306 with Spring Boot, get the data, expose it on
+              port:8080/weathers/api.</li>
+            <li>We map this data (which is a JSON object at this point) using HttpClientModule <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; and save it on single arrays with their respective data.</li>
+            <li>Afterwards we show this data as charts on our dragable containers.</li>
+          </ul>
+        </div>
+        <h6>
+          - Security & Access Control
+        </h6>
+        <div style="position: relative; left: 25px">
+          <ul>
+            <li>Only accessible through port:4200</li>
+          </ul>
+        </div>
+        <h6>
+          - Interface
+        </h6>
+        <div style="position: relative; left: 25px">
+          <ul>
+            <li>After accesing the app the user is presented with a header and a grid(albeit with invisible lines).</li>
+            <li>If this grid is empty the user is promted to add a new chart with a card in the middle of the page.</li>
+            <li>On clicking "Add Chart", a grid item pops up promting the user to enter the chart name.</li>
+            <li>Afterwards, the user can select the type of chart & of data,
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; right before the chart appears on a draggable
+              and resizable container.
+            </li>
+            <li>
+              Since our middle box dissapears after adding the first grid item, the user can then add further grid
+              items
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; by clicking the "+" button at the bottom left of the page.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h5>
+        3. Functionalites of the System
+      </h5>
+      <div style="position: relative; left: 25px">
+        <h6>
+          - How Technical Elements Respond to Functionalites
+        </h6>
+        <div style="position: relative; left: 25px">
+          <ul>
+            <li> In the case of our grid item the information is displayed and hidden using the angular *ngIf
+              operator.
+            </li>
+            <li>Using this operator we check if the needed information is given before hiding one element and
+              showing another at its place.</li>
+            <li>
+              Clicking on the back button at the top left of the grid items, changes the "hasChartSelection" &
+              "hasDataSelection" values
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; of the grid component respectively, thus allowing us to edit the grid item.
+            </li>
+            <li>
+              On clicking delete or the "x" button on
+              the top right of the grid item, a function
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; is executed to delete that item from the dashboard.
+            </li>
+            <br>
+
+          </ul>
+        </div>
+        <h6>
+          - How the Functionalities are Split into Modules
+        </h6>
+        <div style="position: relative; left: 25px">
+          <ul>
+            <li>The AppComponent module will only have two Functions, that is to toggle the side menu (drawer)
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; and to contain our router outlet.
+            </li>
+            <li>
+              The HomeComponent module will contain the Grid with all the grid item functionalities such as to
+              give a name,
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; chart type, chart data, delete etc.
+            </li>
+            <li>
+              The DocumentationComponent module will handle... you guessed it, the Documentation.
+            </li>
+            <li>
+              The DashboardService will hold our dashboard array of items.
+            </li>
+            <li>The WeatherDataService will get our data by listening to "localhost:8080/weathers/api" and mapping
+              it into
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; an array of objects.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<!-- <mat-nav-list>
+  <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" mat-list-item> Home</a>
+</mat-nav-list> -->
+<mat-drawer-container [hasBackdrop]="true" style="width: 100%; height: 100%">
+
+  <div class="options-header" id="navigation">
+    <div style="float: left">
+      <button mat-button (click)="drawer.toggle()" style="outline: none">
+        <mat-icon style="color: white">menu</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button id="navText" mat-button>
+        <mat-icon id="navTextIcon">insert_chart_outlined</mat-icon>
+        <a id="navLink" routerLink="">Chart
+          Dashboard</a>
+      </button>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  <mat-drawer #drawer [mode]="over">
+    <mat-nav-list>
+      <a mat-list-item routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="drawer.toggle()">
+        <mat-icon>home</mat-icon>
+        <div style="position: relative; left: 3px; top: 2px">Home</div>
+      </a>
+      <a mat-list-item routerLink="documentation" routerLinkActive="active" (click)="drawer.toggle()">
+        <mat-icon>insert_drive_file</mat-icon>
+        <div style="position: relative; left: 3px; top: 2px">Documentation</div>
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+
+</mat-drawer-container>
